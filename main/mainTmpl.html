@@ -1,0 +1,28 @@
+<div class="container">	
+	<div>
+		<div>
+			<button class="first-button" ng-click="getIdea()">&#8212; get an idea &#8212;</button>
+		</div>
+		<div class='main-display'>
+			<p>{{suggestion}}</p>
+			<div class="main-buttons" ng-show="suggestion && authData">
+				<button class="last-button green-btn" ng-click="acceptSuggestion(suggestion)"><i class="fa fa-caret-right"></i></button>
+				<button class="last-button red-btn" ng-click="resetSuggestion()"><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div>
+			<h3 class="body-h3"><span>::</span>or<span>::</span></h3>
+		</div>
+		<div>
+			<button class="first-button" ng-click="changeShow()">&#8212; submit your own &#8212;</button>
+		</div>
+		<div>
+			<form class="main-form" name="submitIdeaForm" ng-show="toggle">
+				<input class="form-input" type="text" ng-model="adventureIdea" placeholder="what's your idea?" required/>
+				<button class="last-button green-btn" ng-disabled="submitIdeaForm.$invalid" ng-click="submitIdea(adventureIdea)"><i class="fa fa-check"></i></button>
+			</form>
+		</div>
+	</div>
+</div>

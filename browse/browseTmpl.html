@@ -1,0 +1,49 @@
+<div class="container">	
+	<div class="browse-buttons">
+		<button class="first-button" ng-click="changeNew()">&#8212; newest &#8212;</button>
+		<button class="first-button" ng-click="changeCool()">&#8212; coolest &#8212;</button>
+	</div>
+
+	<div ng-show="newest" class="browse-divider">
+		<div ng-repeat="item in completedList | orderBy: '-posted'">
+			<img ng-src="{{item.url}}">
+			<div class="flex-around">
+				<div class="eighty">
+					<div class="flex-end">
+						<div class="username">{{item.user}}</div>
+						<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						<div class="small-fancy">{{item.posted | date: 'medium'}}</div>
+					</div>
+					<div>{{item.prompt}}</div>
+					<div class="small-fancy">{{item.comment}}</div>
+				</div>
+				<div class="twenty">
+					<div class="red-btn">{{item.score}}</div>
+					<button class="last-button" ng-click="upvote(item)"><i class="fa fa-thumbs-o-up"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-show="coolest" class="browse-divider">
+		<div ng-repeat="item in completedList | orderBy: '-score'">
+			<img ng-src="{{item.url}}">
+			<div class="flex-around">
+				<div class="eighty">
+					<div class="flex-end">
+						<div class="username">{{item.user}}</div>
+						<div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						<div class="small-fancy">{{item.posted | date: 'medium'}}</div>
+					</div>
+					<div>{{item.prompt}}</div>
+					<div class="small-fancy">{{item.comment}}</div>
+				</div>
+				<div class="twenty">
+					<div class="red-btn">{{item.score}}</div>
+					<button class="last-button" ng-click="upvote(item)"><i class="fa fa-thumbs-o-up"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

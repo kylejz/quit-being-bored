@@ -1,0 +1,15 @@
+
+<div class="container" ng-repeat="item in ideasArray" ng-show="authData">
+	<div class='main-display my-list-item'>
+		<p>{{item.idea}}</p>
+		<div class="main-buttons">
+			<button class="last-button green-btn" ng-click="item.show = !item.show"><i class="fa fa-caret-down"></i></button>
+			<button class="last-button red-btn" ng-click="ideasArray.$remove(item)"><i class="fa fa-times"></i></button>
+		</div>
+	</div>
+	<form class="my-list-form" name="imageUploader" ng-show="item.show">
+		<input class="form-input list-input" type="text" placeholder="image url..." ng-model="picture" required/>
+		<input class="form-input list-input" type="text" placeholder="tell your story..." ng-model="comments"/>
+		<button class="last-button green-btn" ng-click="uploadImage(picture, comments, item.idea); ideasArray.$remove(item)" ng-disabled="imageUploader.$invalid"><i class="fa fa-check"></i></button>
+	</form>
+</div>

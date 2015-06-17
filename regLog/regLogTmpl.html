@@ -1,0 +1,33 @@
+<div class="container regLog-container">
+
+	<div class="form-container f-c-1">
+		<div>
+			<button class="first-button" ng-click='changeShow1()'>&#8212; sign in &#8212;</button>
+		</div>
+		<div>
+			<form class="grey-form" name='signInForm' ng-show="signInFormShow">
+				<div>
+					<input class="form-input" type="email" placeholder="email address" ng-model="userInfo.email" required/><br>
+					<input class="form-input" type="password" placeholder="password" ng-model="userInfo.password" required/><br>
+				</div>
+				<button class="last-button green-btn" ng-click="signInUser(userInfo)" ng-disabled="signInFormShow.$invalid"><i class="fa fa-check"></i></button>
+			</form>
+		</div>
+	</div>
+
+	<div class="form-container f-c-2">
+		<div>
+			<button class="first-button" ng-click='changeShow2()'>&#8212; register &#8212;</button>
+		</div>
+		<div>
+			<form class="grey-form" name='registerForm' ng-show="registerFormShow">
+				<div>
+					<input class="form-input" type="text" placeholder="username" ng-model="userInfo.name" required><br>
+					<input class="form-input" type="email" placeholder="email address" ng-model="userInfo.email" required/><br>
+					<input class="form-input" type="password" placeholder="password" ng-model="userInfo.password" required/><br>
+				</div>
+				<button class="last-button green-btn" ng-click="registerUser(userInfo)" ng-disabled="registerFormShow.$invalid"><i class="fa fa-check"></i></button>
+			</form>
+		</div>
+	</div>
+</div>
