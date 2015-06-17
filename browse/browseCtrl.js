@@ -1,6 +1,6 @@
 var app = angular.module('doApp'); 
 
-app.controller('browseCtrl', function($scope, qbb, services, completedRef, $firebaseArray, $firebaseAuth) {
+app.controller('browseCtrl', function($scope, qbb, services, completedRef, $firebaseArray, $firebaseAuth, $firebaseObject) {
 
 	//get the info
 
@@ -11,23 +11,44 @@ app.controller('browseCtrl', function($scope, qbb, services, completedRef, $fire
 	$scope.completedList.$loaded()
 	.then(function(data) {
 		console.log(data);
-		// for (var key in data) {
-		// 	if (data[key].posted) {
-		// 		data[key].posted = new Date(data[key].posted);
-		// 	}
-		// }
 	})
 
 	//likes function
 
-	$scope.upvote = function(item){
-		// if(typeof item.posted === "object"){
-		// 	item.posted = item.posted.toISOString();
-		// }
-		item.score++;
-		$scope.completedList.$save(item);
-		// item.posted = new Date(item.posted);
-		console.log(item.posted)
+	$scope.authObj = services.getAuthObj();
+	var authData = $scope.authObj.$getAuth();
+	console.log(authData)
+	$scope.authData = authData;
+	$scope.authObj.$onAuth(function(response) {
+		if (response) {
+			$scope.authData = response;
+		} else {
+			$scope.authData = false;
+		}
+	})
+
+	var makeFirebase2 = function(id, uid) {
+		return new Firebase(qbb.url + 'completed/' + id + '/votes/' + uid)
+	} 
+
+	$scope.upvote = function(item, uid) {
+		var voteObj = $firebaseObject(makeFirebase2(item.$id, uid));
+		voteObj.$loaded(function(){
+			if(voteObj.upvote){
+				voteObj.upvote = false;		
+			} else {
+				voteObj.upvote = true;
+			}
+			voteObj.$save().then(function(){
+					if(voteObj.upvote){
+						item.score++
+					} else {
+						item.score--
+					}
+					$scope.completedList.$save(item)
+			})
+		})
+		
 	}
 
 	//toggle view options

@@ -5,7 +5,7 @@
 	</div>
 
 	<div ng-show="newest" class="browse-divider">
-		<div ng-repeat="item in completedList | orderBy: '-posted'">
+		<div ng-repeat="item in completedList | orderBy: '-posted' | limitTo: 10">
 			<img ng-src="{{item.url}}">
 			<div class="flex-around">
 				<div class="eighty">
@@ -19,14 +19,14 @@
 				</div>
 				<div class="twenty">
 					<div class="red-btn">{{item.score}}</div>
-					<button class="last-button" ng-click="upvote(item)"><i class="fa fa-thumbs-o-up"></i></button>
+					<button ng-show="authData" class="last-button" ng-click="upvote(item, authData.uid)"><i class="fa fa-thumbs-o-up"></i></button>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div ng-show="coolest" class="browse-divider">
-		<div ng-repeat="item in completedList | orderBy: '-score'">
+		<div ng-repeat="item in completedList | orderBy: '-score' | limitTo: 10">
 			<img ng-src="{{item.url}}">
 			<div class="flex-around">
 				<div class="eighty">
@@ -40,7 +40,7 @@
 				</div>
 				<div class="twenty">
 					<div class="red-btn">{{item.score}}</div>
-					<button class="last-button" ng-click="upvote(item)"><i class="fa fa-thumbs-o-up"></i></button>
+					<button ng-show="authData" class="last-button" ng-click="upvote(item, authData.uid)"><i class="fa fa-thumbs-o-up"></i></button>
 				</div>
 			</div>
 		</div>
